@@ -12,14 +12,8 @@ export async function SignInEmailAction(formData: FormData) {
   if (!password) return { error: "Please enter a password" };
 
   try {
-    const rawHeaders = await headers();
-    const plainHeaders: Record<string, string> = {};
-    for (const [key, value] of rawHeaders.entries()) {
-      plainHeaders[key] = value;
-    }
-
     await auth.api.signInEmail({
-      headers: plainHeaders,
+      headers: await headers(),
       body: {
         email,
         password,
