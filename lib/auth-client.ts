@@ -9,7 +9,9 @@ import type { auth } from "@/lib/auth";
 import { ac, roles } from "@/lib/permissions";
 
 const authClient = createAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL:
+    process.env.NEXT_PUBLIC_API_URL ||
+    "https://better-auth-tutorial-nextjs.vercel.app",
   plugins: [
     inferAdditionalFields<typeof auth>(),
     adminClient({ ac, roles }),

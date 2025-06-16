@@ -18,6 +18,7 @@ export async function SignUpEmailAction(formData: FormData) {
         email,
         password,
       },
+      asResponse: true,
     });
 
     return { error: null };
