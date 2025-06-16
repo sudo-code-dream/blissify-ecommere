@@ -168,8 +168,6 @@ const options = {
 
 export const auth = betterAuth({
   ...options,
-  origin: process.env.BETTER_AUTH_URL,
-  secret: process.env.BETTER_AUTH_SECRET,
   plugins: [
     ...(options.plugins ?? []),
     customSession(async ({ user, session }) => {
