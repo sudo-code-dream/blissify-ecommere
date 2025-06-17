@@ -2,7 +2,6 @@
 
 import { auth } from "@/lib/auth";
 import { APIError } from "better-auth/api";
-import { error } from "console";
 import { headers } from "next/headers";
 
 export async function changePasswordAction(formData: FormData) {
