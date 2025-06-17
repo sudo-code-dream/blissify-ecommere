@@ -19,7 +19,6 @@ import { cn } from "@/lib/utils";
 import { SignInEmailAction } from "@/actions/SignInEmail.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
@@ -33,15 +32,30 @@ export default function SignIn() {
     setIsLoading(true);
 
     const formData = new FormData(evt.target as HTMLFormElement);
-    const result = await SignInEmailAction(formData);
+    const email = String(formData.get("email"));
+    const password = String(formData.get("password"));
 
-    if (result.ok) {
-      toast.success("Login successful");
-      router.push("/profile");
-    } else {
-      toast.error(result.error);
-      setIsLoading(false);
-    }
+    await signIn.email(
+      {
+        email,
+        password,
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onResponse: () => {
+          setIsLoading(false);
+        },
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
+        onSuccess: () => {
+          toast.success("Logged in successfully");
+          router.push("/profile");
+        },
+      }
+    );
   }
 
   return (
@@ -184,13 +198,10 @@ export default function SignIn() {
         <CardFooter>
           <div className='flex justify-center w-full border-t py-4'>
             <p className='text-center text-xs text-neutral-500'>
-              built with{" "}
-              <Link
-                href='https://better-auth.com'
-                className='underline'
-                target='_blank'>
+              Don't have an account? {""}
+              <Link href='/auth/sign-up' className='underline'>
                 <span className='dark:text-white/70 cursor-pointer'>
-                  better-auth.
+                  Sign Up
                 </span>
               </Link>
             </p>

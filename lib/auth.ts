@@ -16,7 +16,6 @@ const options = {
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  trustedOrigins: [process.env.VERCEL_URL!],
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,
