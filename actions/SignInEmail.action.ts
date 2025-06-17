@@ -4,6 +4,7 @@ import { auth, ErrorCode } from "@/lib/auth";
 import { headers } from "next/headers";
 import { APIError } from "better-auth/api";
 import { redirect } from "next/navigation";
+import { error } from "console";
 
 export async function SignInEmailAction(formData: FormData) {
   const email = String(formData.get("email"));
@@ -12,15 +13,23 @@ export async function SignInEmailAction(formData: FormData) {
   if (!password) return { error: "Please enter a password" };
 
   try {
-    await auth.api.signInEmail({
+    const response = await auth.api.signInEmail({
       headers: await headers(),
       body: {
         email,
         password,
       },
+      asResponse: true,
     });
-
-    return { error: null };
+    if (response.ok) {
+      return { ok: true };
+    } else {
+      const errorData = await response.json();
+      return {
+        ok: false,
+        error: errorData?.message || "Invalid email or password",
+      };
+    }
   } catch (error) {
     if (error instanceof APIError) {
       const errCode = error.body ? (error.body.code as ErrorCode) : "UNKNOWN";

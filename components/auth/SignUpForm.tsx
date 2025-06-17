@@ -18,13 +18,13 @@ const SignUpForm = () => {
 
     const formData = new FormData(evt.target as HTMLFormElement);
 
-    const { error } = await SignUpEmailAction(formData);
-    if (error) {
-      toast.error(error);
-      setIsLoading(false);
-    } else {
+    const result = await SignUpEmailAction(formData);
+    if (result.ok) {
       toast.success("Account created successfully. Please verify your email!");
       router.push("/auth/sign-up/success");
+    } else {
+      toast.error(result.error);
+      setIsLoading(false);
     }
 
     //     name,

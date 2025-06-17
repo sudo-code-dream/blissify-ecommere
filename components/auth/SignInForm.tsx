@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 import { SignInEmailAction } from "@/actions/SignInEmail.action";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { error } from "console";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
@@ -32,14 +33,14 @@ export default function SignIn() {
     setIsLoading(true);
 
     const formData = new FormData(evt.target as HTMLFormElement);
+    const result = await SignInEmailAction(formData);
 
-    const { error } = await SignInEmailAction(formData);
-    if (error) {
-      toast.error(error);
-      setIsLoading(false);
-    } else {
+    if (result.ok) {
       toast.success("Login successful");
       router.push("/profile");
+    } else {
+      toast.error(result.error);
+      setIsLoading(false);
     }
   }
 

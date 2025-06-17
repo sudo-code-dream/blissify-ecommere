@@ -12,7 +12,7 @@ export async function SignUpEmailAction(formData: FormData) {
   if (!password) return { error: "Please enter a password" };
 
   try {
-    await auth.api.signUpEmail({
+    const response = await auth.api.signUpEmail({
       body: {
         name,
         email,
@@ -21,7 +21,15 @@ export async function SignUpEmailAction(formData: FormData) {
       asResponse: true,
     });
 
-    return { error: null };
+    if (response.ok) {
+      return { ok: true };
+    } else {
+      const errorData = await response.json();
+      return {
+        ok: false,
+        error: errorData?.message || "Somehing went wrong. Please try again",
+      };
+    }
   } catch (error) {
     if (error instanceof APIError) {
       const errCode = error.body ? (error.body.code as ErrorCode) : "UNKNOWN";
