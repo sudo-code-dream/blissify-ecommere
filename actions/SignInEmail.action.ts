@@ -4,7 +4,6 @@ import { auth, ErrorCode } from "@/lib/auth";
 import { headers } from "next/headers";
 import { APIError } from "better-auth/api";
 import { redirect } from "next/navigation";
-import { error } from "console";
 
 export async function SignInEmailAction(formData: FormData) {
   const email = String(formData.get("email"));
