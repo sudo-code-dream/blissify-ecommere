@@ -1,23 +1,31 @@
-// app/api/admin/shop-application/[id]/approve/route.ts
+// app/api/admin/shop-applications/[id]/approve/route.ts
 
-import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/require-admin";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const session = await requireAdmin();
+export async function POST(req: NextRequest) {
+  const admin = await requireAdmin();
+
+  // Extract the shop application ID from the URL
+  const url = new URL(req.url);
+  const id = url.pathname.split("/").at(-2); // Gets the [id] from the URL
+
+  if (!id) {
+    return NextResponse.json(
+      { error: "Invalid application ID" },
+      { status: 400 }
+    );
+  }
 
   const application = await prisma.shopApplication.update({
-    where: { id: params.id },
+    where: { id },
     include: {
       user: true,
     },
     data: {
       status: "APPROVED",
-      reviewedBy: { connect: { id: session.user.id } },
+      reviewedBy: { connect: { id: admin.user.id } },
     },
   });
 
@@ -37,6 +45,5 @@ export async function POST(
     },
   });
 
-  // Instead of `redirect`, return a response
   return NextResponse.json({ success: true });
 }
