@@ -9,10 +9,19 @@ export async function POST(req: NextRequest) {
 
   // ✅ Extract ID from the URL
   const segments = req.nextUrl.pathname.split("/");
-  const id = segments[5]; // ["", "api", "admin", "shop-applications", "{id}", "approve"]
+  const id = segments[4]; // ["", "api", "admin", "shop-applications", "{id}", "approve"]
 
   if (!id) {
     return NextResponse.json({ error: "Missing ID" }, { status: 400 });
+  }
+
+  const existing = await prisma.shopApplication.findUnique({ where: { id } });
+
+  if (!existing) {
+    return NextResponse.json(
+      { error: "Application not found" },
+      { status: 404 }
+    );
   }
 
   const application = await prisma.shopApplication.update({
