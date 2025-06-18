@@ -4,12 +4,11 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(
-  req: NextRequest,
-  context: { params: { id: string } }
-) {
+export async function POST(req: NextRequest) {
   const admin = await requireAdmin();
-  const id = context.params.id;
+
+  // ✅ Extract ID from the URL (safe in App Router)
+  const id = req.nextUrl.pathname.split("/")[5]; // ["", "api", "admin", "shop-applications", "{id}", "approve"]
 
   if (!id) {
     return NextResponse.json(
