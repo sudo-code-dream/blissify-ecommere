@@ -52,7 +52,7 @@ export default function SignIn() {
         },
         onSuccess: () => {
           toast.success("Logged in successfully");
-          router.push("/profile");
+          router.push("/");
         },
       }
     );

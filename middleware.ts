@@ -17,7 +17,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/auth/sign-in", req.url));
   }
   if (isOnAuthRoute && isLoggedIn) {
-    return NextResponse.redirect(new URL("/profile", req.url));
+    return NextResponse.redirect(new URL("/user/account/profile", req.url));
   }
   return res;
 }

@@ -26,7 +26,7 @@ export default function SignUp() {
     setLoading(true);
 
     const formData = new FormData(evt.target as HTMLFormElement);
-    const name = String(formData.get("first-name"));
+    const name = String(formData.get("name"));
     const email = String(formData.get("email"));
     const password = String(formData.get("password"));
 

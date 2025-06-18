@@ -13,6 +13,12 @@ enum UserRole {
   ADMIN
 }
 
+enum ApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model Post {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -29,21 +35,29 @@ model Post {
 
 model User {
   id        String   @id @default(uuid())
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   name          String
-  email         String    @unique
+  email         String   @unique
   emailVerified Boolean
   image         String?
-  role          UserRole  @default(USER)
-  banned        Boolean?
-  banReason     String?
-  banExpires    DateTime?
+  role          UserRole @default(USER)
+
+  banned     Boolean?  @default(false)
+  banReason  String?
+  banExpires DateTime?
 
   sessions Session[]
   accounts Account[]
   posts    Post[]
+  reviews  Review[]  @relation("UserReviews")
+  orders   Order[]
+
+  shop Shop?
+
+  shopApplications     ShopApplication[]
+  reviewedApplications ShopApplication[] @relation("ReviewedBy") // 👈 Add this line
 
   @@map("users")
 }
@@ -95,4 +109,120 @@ model Verification {
   expiresAt  DateTime
 
   @@map("verifications")
+}
+
+model Shop {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  email       String  @unique
+  phone       String?
+  image       String?
+  coverImage  String? // for banners or shop covers
+  description String?
+
+  address    String?
+  city       String?
+  province   String?
+  postalCode String?
+  country    String?
+
+  rating     Float   @default(0)
+  isVerified Boolean @default(false)
+  isActive   Boolean @default(true)
+
+  owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId String @unique // ✅ Ensures one shop per user
+
+  products Product[] // relation to products
+  orders   Order[] // relation to orders
+  reviews  Review[] // optional: from customers
+}
+
+model Product {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  image       String?
+  price       Float
+  stock       Int     @default(0)
+  isActive    Boolean @default(true)
+
+  shopId String
+  shop   Shop   @relation(fields: [shopId], references: [id])
+
+  orders  OrderItem[]
+  reviews Review[]
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  userId String // the buyer
+  user   User   @relation(fields: [userId], references: [id])
+
+  shopId String
+  shop   Shop   @relation(fields: [shopId], references: [id])
+
+  items       OrderItem[]
+  totalAmount Float
+  status      String // pending, shipped, delivered, etc.
+}
+
+model OrderItem {
+  id String @id @default(uuid())
+
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id])
+
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  quantity Int
+  price    Float
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+
+  rating  Float
+  comment String?
+
+  userId String
+  user   User   @relation("UserReviews", fields: [userId], references: [id])
+
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
+
+  shopId String?
+  shop   Shop?   @relation(fields: [shopId], references: [id])
+}
+
+model ShopApplication {
+  id        String            @id @default(uuid())
+  createdAt DateTime          @default(now())
+  status    ApplicationStatus @default(PENDING)
+
+  shopName    String
+  image       String?
+  phone       String?
+  description String?
+  address     String?
+  city        String?
+  province    String?
+  postalCode  String?
+  country     String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  reviewedById String?
+  reviewedBy   User?   @relation("ReviewedBy", fields: [reviewedById], references: [id])
 }

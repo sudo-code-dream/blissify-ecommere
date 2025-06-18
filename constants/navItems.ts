@@ -5,7 +5,7 @@ export const NAVBAR_ITEMS = [
   },
   {
     name: "Sell on Blissify",
-    href: "/seller",
+    href: "/seller/apply",
   },
   {
     name: "Track My Order",
