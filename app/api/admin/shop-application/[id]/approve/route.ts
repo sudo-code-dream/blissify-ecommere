@@ -1,11 +1,14 @@
-// app/admin/shop-applications/[id]/approve/route.ts
+// app/api/admin/shop-application/[id]/approve/route.ts
 
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/require-admin";
-import { redirect } from "next/navigation";
 
-export async function POST(_: Request, { params }: { params: { id: string } }) {
-  await requireAdmin();
+export async function POST(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const session = await requireAdmin();
 
   const application = await prisma.shopApplication.update({
     where: { id: params.id },
@@ -14,11 +17,10 @@ export async function POST(_: Request, { params }: { params: { id: string } }) {
     },
     data: {
       status: "APPROVED",
-      reviewedBy: { connect: { id: (await requireAdmin()).user.id } },
+      reviewedBy: { connect: { id: session.user.id } },
     },
   });
 
-  // Optionally create the Shop record here
   await prisma.shop.create({
     data: {
       name: application.shopName,
@@ -35,5 +37,6 @@ export async function POST(_: Request, { params }: { params: { id: string } }) {
     },
   });
 
-  redirect("/admin/shop-applications");
+  // Instead of `redirect`, return a response
+  return NextResponse.json({ success: true });
 }
