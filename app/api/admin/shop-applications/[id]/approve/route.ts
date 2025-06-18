@@ -4,12 +4,13 @@ import { requireAdmin } from "@/lib/auth/require-admin";
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   const session = await requireAdmin();
+  const id = context.params.id;
 
   const application = await prisma.shopApplication.update({
-    where: { id: params.id },
+    where: { id },
     include: {
       user: true,
     },
