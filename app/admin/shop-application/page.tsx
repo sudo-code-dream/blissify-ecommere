@@ -30,14 +30,14 @@ export default async function ShopApplicationsPage() {
               <p>{app.description}</p>
               <div className='flex gap-2 pt-4'>
                 <form
-                  action={`/admin/shop-applications/${app.id}/approve`}
+                  action={`/api/admin/shop-applications/${app.id}/approve`}
                   method='post'>
                   <Button type='submit' variant='default'>
                     Approve
                   </Button>
                 </form>
                 <form
-                  action={`/admin/shop-applications/${app.id}/reject`}
+                  action={`/api/admin/shop-applications/${app.id}/reject`}
                   method='post'>
                   <Button type='submit' variant='destructive'>
                     Reject
