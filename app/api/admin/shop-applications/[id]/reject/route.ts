@@ -1,18 +1,19 @@
-// app/api/admin/shop-applications/[id]/reject/route.ts
-
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/require-admin";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest) {
+export async function POST(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
   const admin = await requireAdmin();
-
-  // ✅ Extract the ID from the URL path
-  const segments = req.nextUrl.pathname.split("/");
-  const id = segments[5]; // ["", "api", "admin", "shop-applications", "{id}", "reject"]
+  const { id } = context.params;
 
   if (!id) {
-    return NextResponse.json({ error: "Missing ID" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Missing application ID" },
+      { status: 400 }
+    );
   }
 
   await prisma.shopApplication.update({
