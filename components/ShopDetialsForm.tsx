@@ -85,12 +85,13 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
           />
         </FormGrid>
         <FormGrid size={{ xs: 12, md: 6 }}>
-          <FormLabel htmlFor='last-name' required>
+          <FormLabel htmlFor='shopCategory' required>
             Shop Category
           </FormLabel>
           <Select
-            labelId='demo-multiple-checkbox-label'
-            id='demo-multiple-checkbox'
+            labelId='shopCategory'
+            id='shopCategory'
+            name='shopCategory'
             multiple
             value={personName}
             onChange={handleChange}
@@ -106,24 +107,24 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
           </Select>
         </FormGrid>
         <FormGrid size={{ xs: 12 }}>
-          <FormLabel htmlFor='address1' required>
+          <FormLabel htmlFor='shopDescription' required>
             Shop Description
           </FormLabel>
           <OutlinedInput
-            id='address1'
-            name='address1'
-            type='address1'
-            placeholder='Street name and number'
-            autoComplete='shipping address-line1'
+            id='shopDescription'
+            name='shopDescription'
+            type='shopDescription'
+            placeholder='Shop Description'
             required
-            size='small'
+            multiline
+            rows={4}
           />
         </FormGrid>
         <FormGrid size={{ xs: 12 }}>
-          <FormLabel htmlFor='address2'>Shop Logo/Image</FormLabel>
+          <FormLabel htmlFor='logo'>Shop Logo/Image</FormLabel>
           <OutlinedInput
-            id='address2'
-            name='address2'
+            id='logo'
+            name='logo'
             type='file'
             required
             size='small'
@@ -179,16 +180,10 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
             id='country'
             name='country'
             type='country'
-            placeholder='United States'
+            placeholder='Philippines'
             autoComplete='shipping country'
             required
             size='small'
-          />
-        </FormGrid>
-        <FormGrid size={{ xs: 12 }}>
-          <FormControlLabel
-            control={<Checkbox name='saveAddress' value='yes' />}
-            label='Use this address for payment details'
           />
         </FormGrid>
       </Grid>

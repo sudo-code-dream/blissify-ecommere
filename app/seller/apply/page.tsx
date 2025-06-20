@@ -62,6 +62,8 @@ export default function Checkout() {
         return <ShopDetailsForm formRef={shopDetailsRef} />;
       case 2:
         return <DocumentsVerification formRef={documentsVerificationRef} />;
+      case 3:
+        return <Review />;
       default:
         throw new Error("Unknown step");
     }

@@ -61,19 +61,6 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
             size='small'
           />
         </FormGrid>
-
-        <FormGrid size={{ xs: 12 }}>
-          <FormLabel htmlFor='address2'>Address line 2</FormLabel>
-          <OutlinedInput
-            id='address2'
-            name='address2'
-            type='text'
-            placeholder='Apartment, suite, unit, etc. (optional)'
-            autoComplete='shipping address-line2'
-            size='small'
-          />
-        </FormGrid>
-
         <FormGrid size={{ xs: 6 }}>
           <FormLabel htmlFor='city' required>
             City
@@ -127,7 +114,7 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
             id='country'
             name='country'
             type='text'
-            placeholder='United States'
+            placeholder='Philippines'
             autoComplete='shipping country'
             required
             size='small'
