@@ -35,7 +35,7 @@ function getStepContent(step: number) {
       throw new Error("Unknown step");
   }
 }
-export default function Checkout(props: { disableCustomTheme?: boolean }) {
+export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -44,7 +44,7 @@ export default function Checkout(props: { disableCustomTheme?: boolean }) {
     setActiveStep(activeStep - 1);
   };
   return (
-    <AppTheme {...props}>
+    <AppTheme disableCustomTheme={false}>
       <CssBaseline enableColorScheme />
       <Box sx={{ position: "fixed", top: "1rem", right: "1rem" }}>
         <ColorModeIconDropdown />
