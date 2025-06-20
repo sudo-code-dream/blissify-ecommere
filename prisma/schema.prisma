@@ -116,6 +116,7 @@ model Shop {
   updatedAt   DateTime @updatedAt
 
   name        String
+  slug        String @unique
   email       String   @unique
   phone       String?
   image       String?
@@ -147,6 +148,7 @@ model Product {
   updatedAt   DateTime @updatedAt
 
   name        String
+  slug      String   @unique 
   description String?
   image       String?
   price       Float

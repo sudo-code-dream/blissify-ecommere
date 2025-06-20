@@ -3,6 +3,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth/require-admin";
+import { slugify } from "@/lib/utils/slugify";
 
 export async function POST(req: NextRequest) {
   const session = await requireAdmin();
@@ -24,6 +25,17 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  async function generateUniqueShopSlug(base: string) {
+    const rawSlug = slugify(base);
+    let slug = rawSlug;
+    let count = 1;
+
+    while (await prisma.shop.findUnique({ where: { slug } })) {
+      slug = `${rawSlug}-${count++}`;
+    }
+
+    return slug;
+  }
   const application = await prisma.shopApplication.update({
     where: { id },
     include: {
@@ -34,10 +46,12 @@ export async function POST(req: NextRequest) {
       reviewedBy: { connect: { id: session.user.id } },
     },
   });
+  const slug = await generateUniqueShopSlug(application.shopName);
 
   await prisma.shop.create({
     data: {
       name: application.shopName,
+      slug,
       email: application.user.email,
       phone: application.phone || undefined,
       image: application.image || undefined,

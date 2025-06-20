@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -13,8 +13,9 @@ interface UpdateUserFormProps {
 }
 
 export default function UpdateUserForm({ name, image }: UpdateUserFormProps) {
-  const [isPending, setIsPending] = useState(false);
   const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
+  
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
@@ -47,6 +48,8 @@ export default function UpdateUserForm({ name, image }: UpdateUserFormProps) {
       },
     });
   }
+
+
 
   return (
     <form className='max-w-sm w-full space-y-4' onSubmit={handleSubmit}>

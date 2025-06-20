@@ -1,62 +1,78 @@
 "use client";
-import { updateUser, useSession } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { Button } from "../ui/button";
-import { toast } from "sonner";
+import { useEffect, useState } from "react";
 import SignIn from "./ChangeAccountDetailsForm";
+import { updateUser, useSession } from "@/lib/auth-client";
+import { toast } from "sonner";
+import ChangeAccountDetailsForm from "./ChangeAccountDetailsForm";
+
+type Session = {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    image?: string;
+    role: string;
+  };
+};
 
 export default function Profile() {
-  const router = useRouter();
-  const { data: session, isPending, error, refetch } = useSession();
-  const [isLoading, setIsLoading] = useState(false);
-  const [name, setName] = useState("");
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const name = session?.user.name;
+  const email = session?.user.email;
 
   useEffect(() => {
-    if (!isPending && !session) {
-      router.push("/auth/sign-in");
-    }
-  }, [session, isPending, router]);
-
-  useEffect(() => {
-    if (session?.user?.name) {
-      setName(session.user.name);
-    }
-  }, [session]);
-
-  if (isPending || !session) {
-    return <div>Loading...</div>;
-  }
-
-  async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
-    evt.preventDefault();
-    const formData = new FormData(evt.currentTarget as HTMLFormElement);
-    const name = String(formData.get("name"));
-
-    if (!name) {
-      return toast.error("Please enter a name");
+    async function loadSession() {
+      const res = await fetch("/api/user/session");
+      const data = await res.json();
+      setSession(data.session);
     }
 
-    await updateUser(
-      {
-        name,
-      },
-      {
-        onRequest: () => {
-          setIsLoading(true);
-        },
-        onResponse: () => {
-          setIsLoading(false);
-        },
-        onError: (ctx) => {
-          toast.error(ctx.error.message);
-        },
-        onSuccess: () => {
-          toast.success("Update successfully");
-        },
+    loadSession();
+  }, []);
+
+  async function handleImageChange(evt: React.ChangeEvent<HTMLInputElement>) {
+    const file = evt.target.files?.[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("/api/blob", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      const imageUrl = data.url;
+
+      if (imageUrl) {
+        setPreviewImage(imageUrl);
+
+        // ✅ Update user image in BetterAuth
+        await updateUser({
+          ...(name && { name }),
+          image: imageUrl,
+          fetchOptions: {
+            onError: (ctx) => {
+              toast.error(ctx.error.message);
+            },
+            onSuccess: () => {
+              toast.success("Image chaged successfully");
+            },
+          },
+        });
       }
-    );
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
   }
+
+  if (session) {
+    console.log(session.user.name);
+  }
+  const currentImage = previewImage || session?.user?.image || "No Image";
 
   return (
     <div className='px-6 pb-4 sm:px-4'>
@@ -72,16 +88,40 @@ export default function Profile() {
       <div className='pt-1 flex flex-col lg:flex-row items-start gap-8'>
         {/* Form Section */}
         <div className='flex-1 w-full'>
-          <SignIn name={name} />
+          <ChangeAccountDetailsForm email={email} name={name} />
         </div>
 
-        {/* Sidebar Section (optional image upload, etc.) */}
+        {/* Sidebar Section - Profile Picture */}
+        {/* Sidebar Section - Profile Picture */}
         <div className='w-full lg:w-[17.5rem] border-t lg:border-t-0 lg:border-l border-[#efefef] flex justify-center pt-6 lg:pt-0 lg:pl-6'>
-          {/* Optional sidebar content */}
+          <div className='flex flex-col items-center gap-4'>
+            <img
+              src={currentImage}
+              alt='Profile'
+              className='w-24 h-24 rounded-full object-cover border border-gray-200 shadow-sm'
+            />
+
+            <div className='relative'>
+              <input
+                id='profile-upload'
+                type='file'
+                accept='image/*'
+                onChange={handleImageChange}
+                className='hidden'
+              />
+              <label
+                htmlFor='profile-upload'
+                className='inline-block cursor-pointer px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md transition-colors shadow-sm'>
+                Upload New Photo
+              </label>
+            </div>
+
+            <p className='text-xs text-gray-500 text-center px-2'>
+              Accepted formats: JPG, PNG. Max size: 2MB.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-

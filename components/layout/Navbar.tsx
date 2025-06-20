@@ -1,15 +1,34 @@
-import { NAVBAR_ITEMS } from "@/constants/navItems";
+"use client";
+import { NAVBAR_ITEMS, NavbarItem } from "@/constants/navItems";
+import { useSession } from "@/lib/auth-client";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 export default function Navbar() {
+  const { data: session, isPending, error, refetch } = useSession();
+
+  // ✅ Only replace "Login" with the user's name, and remove "SignUp"
+  const filteredNavbarItems: NavbarItem[] = session
+    ? NAVBAR_ITEMS.reduce<NavbarItem[]>((acc, item) => {
+        if (item.name === "Login") {
+          acc.push({
+            name: session.user?.name || "Account",
+            href: "/user/account/profile", // link to profile or dashboard
+          });
+        } else if (item.name !== "SignUp") {
+          acc.push(item);
+        }
+        return acc;
+      }, [])
+    : NAVBAR_ITEMS;
+
   return (
     <nav className={"border-b"}>
       <div className='w-full h-6 hidden uppercase mt-0 justify-end items-center md:flex'>
         <div className='flex w-full justify-end container items-center mx-auto'>
-          {NAVBAR_ITEMS.map((item) => (
+          {filteredNavbarItems.map((item) => (
             <div className='flex items-center justify-center' key={item.name}>
               <Link
                 key={item.name}

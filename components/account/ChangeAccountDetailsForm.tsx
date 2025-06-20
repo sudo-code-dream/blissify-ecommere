@@ -11,22 +11,23 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { Loader2, Key } from "lucide-react";
 import { signIn, updateUser } from "@/lib/auth-client";
-import Link from "next/link";
+
 import { toast } from "sonner";
+import PhoneInput from "react-phone-number-input";
 
 interface SignInProps {
-  name: string;
+  name?: string;
+  email?: string;
 }
 
-export default function SignIn({ name }: SignInProps) {
-  const [email, setEmail] = useState("");
+export default function ChangeAccountDetailsForm({ name, email }: SignInProps) {
+  const [eemail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
+  const [value, setValue] = useState<string | undefined>();
 
   async function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     const formData = new FormData(evt.currentTarget as HTMLFormElement);
@@ -36,9 +37,7 @@ export default function SignIn({ name }: SignInProps) {
       return toast.error("Please input a name");
     }
 
-    await updateUser({
-     
-    })
+    await updateUser({});
   }
 
   return (
@@ -56,18 +55,72 @@ export default function SignIn({ name }: SignInProps) {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
-                value={email}
+                value={eemail}
               />
             </div>
 
             <div className='grid gap-2'>
+              <Label htmlFor='name'>Email</Label>
+              <Input
+                id='name'
+                type='name'
+                name='name'
+                placeholder={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                value={eemail}
+              />
+            </div>
+            <div className='grid gap-2'>
+              <Label htmlFor='phone'>Phone Number</Label>
+              <PhoneInput
+                id='phone'
+                international
+                defaultCountry='US'
+                placeholder='Enter phone number'
+                value={value}
+                onChange={setValue}
+                className='custom-phone-input w-full'
+                style={{
+                  border: "1px solid #e2e8f0",
+                  borderRadius: "0.375rem",
+                  padding: "0.5rem 0.75rem",
+                  fontSize: "1rem",
+                  width: "100%",
+                  outline: "none",
+                }}
+              />
+              <style jsx global>{`
+                .custom-phone-input .PhoneInputCountrySelect {
+                  border: 1px solid #e2e8f0 !important; /* slate-300 */
+                  border-radius: 0.375rem;
+                  padding: 0.375rem 0.5rem;
+                  background: white;
+                }
+
+                .custom-phone-input .PhoneInputCountrySelect:focus {
+                  outline: none;
+                  box-shadow: none;
+                }
+
+                .custom-phone-input .PhoneInputCountryIcon {
+                  width: 1rem !important; /* Tailwind w-4 */
+                  height: 1rem !important; /* Tailwind h-4 */
+                }
+
+                .custom-phone-input .PhoneInputInput {
+                  border: none;
+                  outline: none;
+                  font-size: 1rem;
+                  width: 100%;
+                }
+              `}</style>
+            </div>
+
+            {/* <div className='grid gap-2'>
               <div className='flex items-center'>
                 <Label htmlFor='password'>Password</Label>
-                <Link
-                  href='#'
-                  className='ml-auto inline-block text-sm underline'>
-                  Forgot your password?
-                </Link>
               </div>
 
               <Input
@@ -78,17 +131,7 @@ export default function SignIn({ name }: SignInProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-
-            <div className='flex items-center gap-2'>
-              <Checkbox
-                id='remember'
-                onClick={() => {
-                  setRememberMe(!rememberMe);
-                }}
-              />
-              <Label htmlFor='remember'>Remember me</Label>
-            </div>
+            </div> */}
 
             <Button
               type='submit'
@@ -97,7 +140,7 @@ export default function SignIn({ name }: SignInProps) {
               onClick={async () => {
                 await signIn.email(
                   {
-                    email,
+                    email: eemail,
                     password,
                   },
                   {
