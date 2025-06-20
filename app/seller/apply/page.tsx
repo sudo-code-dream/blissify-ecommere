@@ -13,7 +13,7 @@ import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import UserDetailsForm from "@/components/AddressForm";
+import UserDetailsForm from "@/components/UserDetails";
 import Info from "@/components/Info";
 import InfoMobile from "@/components/InfoMobile";
 import Review from "@/components/Review";
@@ -21,28 +21,52 @@ import SitemarkIcon from "@/components/SitemarkIcon";
 import AppTheme from "@/theme/AppTheme";
 import ColorModeIconDropdown from "@/theme/ColorModeIconDropDown";
 import ShopDetailsForm from "@/components/ShopDetialsForm";
+import DocumentsVerification from "@/components/DocumentsVerification";
 
-const steps = ["Personal Information", "Shop Details", "Verification"];
-function getStepContent(step: number) {
-  switch (step) {
-    case 0:
-      return <UserDetailsForm />;
-    case 1:
-      return <ShopDetailsForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
+const steps = [
+  "Personal Information",
+  "Shop Details",
+  "Verification",
+  "Review",
+];
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const userDetailsRef = React.useRef<HTMLFormElement>(null);
+  const shopDetailsRef = React.useRef<HTMLFormElement>(null);
+  const documentsVerificationRef = React.useRef<HTMLFormElement>(null);
+
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if (activeStep === 0 && userDetailsRef.current) {
+      const formData = new FormData(userDetailsRef.current);
+      const data = Object.fromEntries(formData.entries());
+      console.log("Step 1 (User Details):", data);
+    }
+
+    if (activeStep === 1 && shopDetailsRef.current) {
+      const formData = new FormData(shopDetailsRef.current);
+      const data = Object.fromEntries(formData.entries());
+      console.log("Step 2 (Shop Details):", data);
+    }
+
+    setActiveStep((prev) => prev + 1);
   };
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <UserDetailsForm formRef={userDetailsRef} />;
+      case 1:
+        return <ShopDetailsForm formRef={shopDetailsRef} />;
+      case 2:
+        return <DocumentsVerification formRef={documentsVerificationRef} />;
+      default:
+        throw new Error("Unknown step");
+    }
+  };
+
   return (
     <AppTheme disableCustomTheme={false}>
       <CssBaseline enableColorScheme />

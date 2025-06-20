@@ -53,11 +53,13 @@ const FormGrid = styled(Grid)(() => ({
   display: "flex",
   flexDirection: "column",
 }));
-type ShopDetailsFormProps = {
+type DocumentsVerificationProps = {
   formRef: React.RefObject<HTMLFormElement | null>;
 };
 
-export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
+export default function DocumentsVerification({
+  formRef,
+}: DocumentsVerificationProps) {
   const [personName, setPersonName] = React.useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
