@@ -15,22 +15,29 @@ const payments = [
   { name: "Expiry date:", detail: "04/2024" },
 ];
 
-export default function Review() {
+interface ReviewProps {
+  formValues: Record<string, any>;
+}
+
+export default function Review({ formValues }: ReviewProps) {
+  const fullAddress = `${formValues.shopCity}, ${formValues.shopState} ${formValues.shopZipCode}, ${formValues.shopCountry}`;
+  const name = `${formValues.firstName} ${formValues.lastName}`;
+
   return (
     <Stack spacing={2}>
       <List disablePadding>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary='Products' secondary='4 selected' />
-          <Typography variant='body2'>$134.98</Typography>
+        <ListItem sx={{ py: 0, px: 0 }}>
+          <ListItemText primary='Shop Name' />
+          <Typography variant='body2'>{formValues.shopName}</Typography>
         </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary='Shipping' secondary='Plus taxes' />
-          <Typography variant='body2'>$9.99</Typography>
+        <ListItem sx={{ py: 0, px: 0 }}>
+          <ListItemText primary='Category' />
+          <Typography variant='body2'>{formValues.shopCategory}</Typography>
         </ListItem>
-        <ListItem sx={{ py: 1, px: 0 }}>
-          <ListItemText primary='Total' />
-          <Typography variant='subtitle1' sx={{ fontWeight: 700 }}>
-            $144.97
+        <ListItem sx={{ py: 0, px: 0 }}>
+          <ListItemText primary='Address' />
+          <Typography variant='body2'>
+            {fullAddress === undefined ? "" : fullAddress}
           </Typography>
         </ListItem>
       </List>
@@ -42,32 +49,30 @@ export default function Review() {
         sx={{ my: 2 }}>
         <div>
           <Typography variant='subtitle2' gutterBottom>
-            Shipment details
+            Shop Details
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>{formValues.shopName}</Typography>
           <Typography gutterBottom sx={{ color: "text.secondary" }}>
-            {addresses.join(", ")}
+            {formValues.shopDescription}
           </Typography>
         </div>
         <div>
           <Typography variant='subtitle2' gutterBottom>
-            Payment details
+            User Details
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Stack
-                  direction='row'
-                  spacing={1}
-                  useFlexGap
-                  sx={{ width: "100%", mb: 1 }}>
-                  <Typography variant='body1' sx={{ color: "text.secondary" }}>
-                    {payment.name}
-                  </Typography>
-                  <Typography variant='body2'>{payment.detail}</Typography>
-                </Stack>
-              </React.Fragment>
-            ))}
+            <React.Fragment>
+              <Stack
+                direction='row'
+                spacing={1}
+                useFlexGap
+                sx={{ width: "100%", mb: 1 }}>
+                <Typography variant='body1' sx={{ color: "text.secondary" }}>
+                  Name
+                </Typography>
+                <Typography variant='body2'>{name}</Typography>
+              </Stack>
+            </React.Fragment>
           </Grid>
         </div>
       </Stack>

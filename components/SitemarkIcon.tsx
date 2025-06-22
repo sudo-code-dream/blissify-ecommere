@@ -1,7 +1,11 @@
 import * as React from "react";
-import SvgIcon from "@mui/material/SvgIcon";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SitemarkIcon() {
-  return <Image src={"/logo.png"} alt='logo' width={86} height={19} />;
+  return (
+    <Link href={"/"}>
+      <Image src={"/logo.png"} alt='logo' width={86} height={19} />
+    </Link>
+  );
 }

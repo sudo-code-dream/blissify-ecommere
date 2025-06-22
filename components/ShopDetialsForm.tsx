@@ -71,12 +71,12 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
     <form ref={formRef}>
       <Grid container spacing={3}>
         <FormGrid size={{ xs: 12, md: 6 }}>
-          <FormLabel htmlFor='first-name' required>
+          <FormLabel htmlFor='shopName' required>
             Shop Name
           </FormLabel>
           <OutlinedInput
-            id='first-name'
-            name='first-name'
+            id='shopName'
+            name='shopName'
             type='name'
             placeholder='John'
             autoComplete='first name'
@@ -131,13 +131,13 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
           />
         </FormGrid>
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='city' required>
+          <FormLabel htmlFor='shopCity' required>
             City
           </FormLabel>
           <OutlinedInput
-            id='city'
-            name='city'
-            type='city'
+            id='shopCity'
+            name='shopCity'
+            type='shopCity'
             placeholder='New York'
             autoComplete='City'
             required
@@ -145,13 +145,13 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
           />
         </FormGrid>
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='state' required>
+          <FormLabel htmlFor='shopState' required>
             State
           </FormLabel>
           <OutlinedInput
-            id='state'
-            name='state'
-            type='state'
+            id='shopState'
+            name='shopState'
+            type='text'
             placeholder='NY'
             autoComplete='State'
             required
@@ -159,13 +159,13 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
           />
         </FormGrid>
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='zip' required>
+          <FormLabel htmlFor='shopZipCode' required>
             Zip / Postal code
           </FormLabel>
           <OutlinedInput
-            id='zip'
-            name='zip'
-            type='zip'
+            id='shopZipCode'
+            name='shopZipCode'
+            type='text'
             placeholder='12345'
             autoComplete='shipping postal-code'
             required
@@ -173,13 +173,13 @@ export default function ShopDetailsForm({ formRef }: ShopDetailsFormProps) {
           />
         </FormGrid>
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='country' required>
+          <FormLabel htmlFor='shopCountry' required>
             Country
           </FormLabel>
           <OutlinedInput
-            id='country'
-            name='country'
-            type='country'
+            id='shopCountry'
+            name='shopCountry'
+            type='text'
             placeholder='Philippines'
             autoComplete='shipping country'
             required

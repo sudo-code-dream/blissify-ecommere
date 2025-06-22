@@ -18,12 +18,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
     <form ref={formRef}>
       <Grid container spacing={3}>
         <FormGrid size={{ xs: 12, md: 6 }}>
-          <FormLabel htmlFor='first-name' required>
+          <FormLabel htmlFor='firstName' required>
             First name
           </FormLabel>
           <OutlinedInput
-            id='first-name'
-            name='first-name'
+            id='firstName'
+            name='firstName'
             type='text'
             placeholder='John'
             autoComplete='first name'
@@ -33,12 +33,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
         </FormGrid>
 
         <FormGrid size={{ xs: 12, md: 6 }}>
-          <FormLabel htmlFor='last-name' required>
+          <FormLabel htmlFor='lastName' required>
             Last name
           </FormLabel>
           <OutlinedInput
-            id='last-name'
-            name='last-name'
+            id='lastName'
+            name='lastName'
             type='text'
             placeholder='Snow'
             autoComplete='last name'
@@ -48,12 +48,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
         </FormGrid>
 
         <FormGrid size={{ xs: 12 }}>
-          <FormLabel htmlFor='address1' required>
+          <FormLabel htmlFor='userAddress' required>
             Address line 1
           </FormLabel>
           <OutlinedInput
-            id='address1'
-            name='address1'
+            id='userAddress'
+            name='userAddress'
             type='text'
             placeholder='Street name and number'
             autoComplete='shipping address-line1'
@@ -62,12 +62,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
           />
         </FormGrid>
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='city' required>
+          <FormLabel htmlFor='userCity' required>
             City
           </FormLabel>
           <OutlinedInput
-            id='city'
-            name='city'
+            id='userCity'
+            name='userCity'
             type='text'
             placeholder='New York'
             autoComplete='city'
@@ -77,12 +77,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
         </FormGrid>
 
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='state' required>
+          <FormLabel htmlFor='userState' required>
             State
           </FormLabel>
           <OutlinedInput
-            id='state'
-            name='state'
+            id='userState'
+            name='userState'
             type='text'
             placeholder='NY'
             autoComplete='state'
@@ -92,12 +92,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
         </FormGrid>
 
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='zip' required>
+          <FormLabel htmlFor='userZipCode' required>
             Zip / Postal code
           </FormLabel>
           <OutlinedInput
-            id='zip'
-            name='zip'
+            id='userZipCode'
+            name='userZipCode'
             type='text'
             placeholder='12345'
             autoComplete='shipping postal-code'
@@ -107,12 +107,12 @@ export default function UserDetailsForm({ formRef }: UserDetailsFormProps) {
         </FormGrid>
 
         <FormGrid size={{ xs: 6 }}>
-          <FormLabel htmlFor='country' required>
+          <FormLabel htmlFor='userCountry' required>
             Country
           </FormLabel>
           <OutlinedInput
-            id='country'
-            name='country'
+            id='userCountry'
+            name='userCountry'
             type='text'
             placeholder='Philippines'
             autoComplete='shipping country'

@@ -85,12 +85,13 @@ export default function DocumentsVerification({
           />
         </FormGrid>
         <FormGrid size={{ xs: 12, md: 6 }}>
-          <FormLabel htmlFor='last-name' required>
+          <FormLabel htmlFor='idType' required>
             ID Type
           </FormLabel>
           <Select
-            labelId='demo-multiple-checkbox-label'
-            id='demo-multiple-checkbox'
+            labelId='idType'
+            id='idType'
+            name='idType'
             multiple
             value={personName}
             onChange={handleChange}

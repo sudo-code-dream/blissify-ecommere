@@ -210,15 +210,34 @@ model ShopApplication {
   createdAt     DateTime         @default(now())
   status        ApplicationStatus @default(PENDING)
 
+  // SHOP DETAILS
   shopName      String
+  category      String?
+  description   String?
   image         String?
   phone         String?
-  description   String?
   address       String?
   city          String?
+  state         String?
+  zipCode       Int?
   province      String?
   postalCode    String?
   country       String?
+  validId       String?
+  idType        String?
+  idNumber      String?
+  idSelfie      String?
+  businessDoc   String?
+
+  // USER DETAILS(OPTIONAL KAY NAKA LINKED NA DAAN ANG USER DETAILS IG SUBMIT SA FORM)
+  firstName     String?
+  lastName      String?
+  userAddress   String?
+  userCity      String?
+  userState     String?
+  userZipCode   Int?
+  userCountry   String?
+
 
   userId        String
   user          User             @relation(fields: [userId], references: [id])

@@ -13720,8 +13720,20 @@ export namespace Prisma {
 
   export type AggregateShopApplication = {
     _count: ShopApplicationCountAggregateOutputType | null
+    _avg: ShopApplicationAvgAggregateOutputType | null
+    _sum: ShopApplicationSumAggregateOutputType | null
     _min: ShopApplicationMinAggregateOutputType | null
     _max: ShopApplicationMaxAggregateOutputType | null
+  }
+
+  export type ShopApplicationAvgAggregateOutputType = {
+    zipCode: number | null
+    userZipCode: number | null
+  }
+
+  export type ShopApplicationSumAggregateOutputType = {
+    zipCode: number | null
+    userZipCode: number | null
   }
 
   export type ShopApplicationMinAggregateOutputType = {
@@ -13729,14 +13741,29 @@ export namespace Prisma {
     createdAt: Date | null
     status: $Enums.ApplicationStatus | null
     shopName: string | null
+    category: string | null
+    description: string | null
     image: string | null
     phone: string | null
-    description: string | null
     address: string | null
     city: string | null
+    state: string | null
+    zipCode: number | null
     province: string | null
     postalCode: string | null
     country: string | null
+    validId: string | null
+    idType: string | null
+    idNumber: string | null
+    idSelfie: string | null
+    businessDoc: string | null
+    firstName: string | null
+    lastName: string | null
+    userAddress: string | null
+    userCity: string | null
+    userState: string | null
+    userZipCode: number | null
+    userCountry: string | null
     userId: string | null
     reviewedById: string | null
   }
@@ -13746,14 +13773,29 @@ export namespace Prisma {
     createdAt: Date | null
     status: $Enums.ApplicationStatus | null
     shopName: string | null
+    category: string | null
+    description: string | null
     image: string | null
     phone: string | null
-    description: string | null
     address: string | null
     city: string | null
+    state: string | null
+    zipCode: number | null
     province: string | null
     postalCode: string | null
     country: string | null
+    validId: string | null
+    idType: string | null
+    idNumber: string | null
+    idSelfie: string | null
+    businessDoc: string | null
+    firstName: string | null
+    lastName: string | null
+    userAddress: string | null
+    userCity: string | null
+    userState: string | null
+    userZipCode: number | null
+    userCountry: string | null
     userId: string | null
     reviewedById: string | null
   }
@@ -13763,33 +13805,73 @@ export namespace Prisma {
     createdAt: number
     status: number
     shopName: number
+    category: number
+    description: number
     image: number
     phone: number
-    description: number
     address: number
     city: number
+    state: number
+    zipCode: number
     province: number
     postalCode: number
     country: number
+    validId: number
+    idType: number
+    idNumber: number
+    idSelfie: number
+    businessDoc: number
+    firstName: number
+    lastName: number
+    userAddress: number
+    userCity: number
+    userState: number
+    userZipCode: number
+    userCountry: number
     userId: number
     reviewedById: number
     _all: number
   }
 
 
+  export type ShopApplicationAvgAggregateInputType = {
+    zipCode?: true
+    userZipCode?: true
+  }
+
+  export type ShopApplicationSumAggregateInputType = {
+    zipCode?: true
+    userZipCode?: true
+  }
+
   export type ShopApplicationMinAggregateInputType = {
     id?: true
     createdAt?: true
     status?: true
     shopName?: true
+    category?: true
+    description?: true
     image?: true
     phone?: true
-    description?: true
     address?: true
     city?: true
+    state?: true
+    zipCode?: true
     province?: true
     postalCode?: true
     country?: true
+    validId?: true
+    idType?: true
+    idNumber?: true
+    idSelfie?: true
+    businessDoc?: true
+    firstName?: true
+    lastName?: true
+    userAddress?: true
+    userCity?: true
+    userState?: true
+    userZipCode?: true
+    userCountry?: true
     userId?: true
     reviewedById?: true
   }
@@ -13799,14 +13881,29 @@ export namespace Prisma {
     createdAt?: true
     status?: true
     shopName?: true
+    category?: true
+    description?: true
     image?: true
     phone?: true
-    description?: true
     address?: true
     city?: true
+    state?: true
+    zipCode?: true
     province?: true
     postalCode?: true
     country?: true
+    validId?: true
+    idType?: true
+    idNumber?: true
+    idSelfie?: true
+    businessDoc?: true
+    firstName?: true
+    lastName?: true
+    userAddress?: true
+    userCity?: true
+    userState?: true
+    userZipCode?: true
+    userCountry?: true
     userId?: true
     reviewedById?: true
   }
@@ -13816,14 +13913,29 @@ export namespace Prisma {
     createdAt?: true
     status?: true
     shopName?: true
+    category?: true
+    description?: true
     image?: true
     phone?: true
-    description?: true
     address?: true
     city?: true
+    state?: true
+    zipCode?: true
     province?: true
     postalCode?: true
     country?: true
+    validId?: true
+    idType?: true
+    idNumber?: true
+    idSelfie?: true
+    businessDoc?: true
+    firstName?: true
+    lastName?: true
+    userAddress?: true
+    userCity?: true
+    userState?: true
+    userZipCode?: true
+    userCountry?: true
     userId?: true
     reviewedById?: true
     _all?: true
@@ -13867,6 +13979,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ShopApplicationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ShopApplicationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ShopApplicationMinAggregateInputType
@@ -13897,6 +14021,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ShopApplicationCountAggregateInputType | true
+    _avg?: ShopApplicationAvgAggregateInputType
+    _sum?: ShopApplicationSumAggregateInputType
     _min?: ShopApplicationMinAggregateInputType
     _max?: ShopApplicationMaxAggregateInputType
   }
@@ -13906,17 +14032,34 @@ export namespace Prisma {
     createdAt: Date
     status: $Enums.ApplicationStatus
     shopName: string
+    category: string | null
+    description: string | null
     image: string | null
     phone: string | null
-    description: string | null
     address: string | null
     city: string | null
+    state: string | null
+    zipCode: number | null
     province: string | null
     postalCode: string | null
     country: string | null
+    validId: string | null
+    idType: string | null
+    idNumber: string | null
+    idSelfie: string | null
+    businessDoc: string | null
+    firstName: string | null
+    lastName: string | null
+    userAddress: string | null
+    userCity: string | null
+    userState: string | null
+    userZipCode: number | null
+    userCountry: string | null
     userId: string
     reviewedById: string | null
     _count: ShopApplicationCountAggregateOutputType | null
+    _avg: ShopApplicationAvgAggregateOutputType | null
+    _sum: ShopApplicationSumAggregateOutputType | null
     _min: ShopApplicationMinAggregateOutputType | null
     _max: ShopApplicationMaxAggregateOutputType | null
   }
@@ -13940,14 +14083,29 @@ export namespace Prisma {
     createdAt?: boolean
     status?: boolean
     shopName?: boolean
+    category?: boolean
+    description?: boolean
     image?: boolean
     phone?: boolean
-    description?: boolean
     address?: boolean
     city?: boolean
+    state?: boolean
+    zipCode?: boolean
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    validId?: boolean
+    idType?: boolean
+    idNumber?: boolean
+    idSelfie?: boolean
+    businessDoc?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    userAddress?: boolean
+    userCity?: boolean
+    userState?: boolean
+    userZipCode?: boolean
+    userCountry?: boolean
     userId?: boolean
     reviewedById?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -13959,14 +14117,29 @@ export namespace Prisma {
     createdAt?: boolean
     status?: boolean
     shopName?: boolean
+    category?: boolean
+    description?: boolean
     image?: boolean
     phone?: boolean
-    description?: boolean
     address?: boolean
     city?: boolean
+    state?: boolean
+    zipCode?: boolean
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    validId?: boolean
+    idType?: boolean
+    idNumber?: boolean
+    idSelfie?: boolean
+    businessDoc?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    userAddress?: boolean
+    userCity?: boolean
+    userState?: boolean
+    userZipCode?: boolean
+    userCountry?: boolean
     userId?: boolean
     reviewedById?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -13978,14 +14151,29 @@ export namespace Prisma {
     createdAt?: boolean
     status?: boolean
     shopName?: boolean
+    category?: boolean
+    description?: boolean
     image?: boolean
     phone?: boolean
-    description?: boolean
     address?: boolean
     city?: boolean
+    state?: boolean
+    zipCode?: boolean
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    validId?: boolean
+    idType?: boolean
+    idNumber?: boolean
+    idSelfie?: boolean
+    businessDoc?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    userAddress?: boolean
+    userCity?: boolean
+    userState?: boolean
+    userZipCode?: boolean
+    userCountry?: boolean
     userId?: boolean
     reviewedById?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -13997,19 +14185,34 @@ export namespace Prisma {
     createdAt?: boolean
     status?: boolean
     shopName?: boolean
+    category?: boolean
+    description?: boolean
     image?: boolean
     phone?: boolean
-    description?: boolean
     address?: boolean
     city?: boolean
+    state?: boolean
+    zipCode?: boolean
     province?: boolean
     postalCode?: boolean
     country?: boolean
+    validId?: boolean
+    idType?: boolean
+    idNumber?: boolean
+    idSelfie?: boolean
+    businessDoc?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    userAddress?: boolean
+    userCity?: boolean
+    userState?: boolean
+    userZipCode?: boolean
+    userCountry?: boolean
     userId?: boolean
     reviewedById?: boolean
   }
 
-  export type ShopApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "status" | "shopName" | "image" | "phone" | "description" | "address" | "city" | "province" | "postalCode" | "country" | "userId" | "reviewedById", ExtArgs["result"]["shopApplication"]>
+  export type ShopApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "status" | "shopName" | "category" | "description" | "image" | "phone" | "address" | "city" | "state" | "zipCode" | "province" | "postalCode" | "country" | "validId" | "idType" | "idNumber" | "idSelfie" | "businessDoc" | "firstName" | "lastName" | "userAddress" | "userCity" | "userState" | "userZipCode" | "userCountry" | "userId" | "reviewedById", ExtArgs["result"]["shopApplication"]>
   export type ShopApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     reviewedBy?: boolean | ShopApplication$reviewedByArgs<ExtArgs>
@@ -14034,14 +14237,29 @@ export namespace Prisma {
       createdAt: Date
       status: $Enums.ApplicationStatus
       shopName: string
+      category: string | null
+      description: string | null
       image: string | null
       phone: string | null
-      description: string | null
       address: string | null
       city: string | null
+      state: string | null
+      zipCode: number | null
       province: string | null
       postalCode: string | null
       country: string | null
+      validId: string | null
+      idType: string | null
+      idNumber: string | null
+      idSelfie: string | null
+      businessDoc: string | null
+      firstName: string | null
+      lastName: string | null
+      userAddress: string | null
+      userCity: string | null
+      userState: string | null
+      userZipCode: number | null
+      userCountry: string | null
       userId: string
       reviewedById: string | null
     }, ExtArgs["result"]["shopApplication"]>
@@ -14473,14 +14691,29 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"ShopApplication", 'DateTime'>
     readonly status: FieldRef<"ShopApplication", 'ApplicationStatus'>
     readonly shopName: FieldRef<"ShopApplication", 'String'>
+    readonly category: FieldRef<"ShopApplication", 'String'>
+    readonly description: FieldRef<"ShopApplication", 'String'>
     readonly image: FieldRef<"ShopApplication", 'String'>
     readonly phone: FieldRef<"ShopApplication", 'String'>
-    readonly description: FieldRef<"ShopApplication", 'String'>
     readonly address: FieldRef<"ShopApplication", 'String'>
     readonly city: FieldRef<"ShopApplication", 'String'>
+    readonly state: FieldRef<"ShopApplication", 'String'>
+    readonly zipCode: FieldRef<"ShopApplication", 'Int'>
     readonly province: FieldRef<"ShopApplication", 'String'>
     readonly postalCode: FieldRef<"ShopApplication", 'String'>
     readonly country: FieldRef<"ShopApplication", 'String'>
+    readonly validId: FieldRef<"ShopApplication", 'String'>
+    readonly idType: FieldRef<"ShopApplication", 'String'>
+    readonly idNumber: FieldRef<"ShopApplication", 'String'>
+    readonly idSelfie: FieldRef<"ShopApplication", 'String'>
+    readonly businessDoc: FieldRef<"ShopApplication", 'String'>
+    readonly firstName: FieldRef<"ShopApplication", 'String'>
+    readonly lastName: FieldRef<"ShopApplication", 'String'>
+    readonly userAddress: FieldRef<"ShopApplication", 'String'>
+    readonly userCity: FieldRef<"ShopApplication", 'String'>
+    readonly userState: FieldRef<"ShopApplication", 'String'>
+    readonly userZipCode: FieldRef<"ShopApplication", 'Int'>
+    readonly userCountry: FieldRef<"ShopApplication", 'String'>
     readonly userId: FieldRef<"ShopApplication", 'String'>
     readonly reviewedById: FieldRef<"ShopApplication", 'String'>
   }
@@ -15088,14 +15321,29 @@ export namespace Prisma {
     createdAt: 'createdAt',
     status: 'status',
     shopName: 'shopName',
+    category: 'category',
+    description: 'description',
     image: 'image',
     phone: 'phone',
-    description: 'description',
     address: 'address',
     city: 'city',
+    state: 'state',
+    zipCode: 'zipCode',
     province: 'province',
     postalCode: 'postalCode',
     country: 'country',
+    validId: 'validId',
+    idType: 'idType',
+    idNumber: 'idNumber',
+    idSelfie: 'idSelfie',
+    businessDoc: 'businessDoc',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    userAddress: 'userAddress',
+    userCity: 'userCity',
+    userState: 'userState',
+    userZipCode: 'userZipCode',
+    userCountry: 'userCountry',
     userId: 'userId',
     reviewedById: 'reviewedById'
   };
@@ -16057,14 +16305,29 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ShopApplication"> | Date | string
     status?: EnumApplicationStatusFilter<"ShopApplication"> | $Enums.ApplicationStatus
     shopName?: StringFilter<"ShopApplication"> | string
+    category?: StringNullableFilter<"ShopApplication"> | string | null
+    description?: StringNullableFilter<"ShopApplication"> | string | null
     image?: StringNullableFilter<"ShopApplication"> | string | null
     phone?: StringNullableFilter<"ShopApplication"> | string | null
-    description?: StringNullableFilter<"ShopApplication"> | string | null
     address?: StringNullableFilter<"ShopApplication"> | string | null
     city?: StringNullableFilter<"ShopApplication"> | string | null
+    state?: StringNullableFilter<"ShopApplication"> | string | null
+    zipCode?: IntNullableFilter<"ShopApplication"> | number | null
     province?: StringNullableFilter<"ShopApplication"> | string | null
     postalCode?: StringNullableFilter<"ShopApplication"> | string | null
     country?: StringNullableFilter<"ShopApplication"> | string | null
+    validId?: StringNullableFilter<"ShopApplication"> | string | null
+    idType?: StringNullableFilter<"ShopApplication"> | string | null
+    idNumber?: StringNullableFilter<"ShopApplication"> | string | null
+    idSelfie?: StringNullableFilter<"ShopApplication"> | string | null
+    businessDoc?: StringNullableFilter<"ShopApplication"> | string | null
+    firstName?: StringNullableFilter<"ShopApplication"> | string | null
+    lastName?: StringNullableFilter<"ShopApplication"> | string | null
+    userAddress?: StringNullableFilter<"ShopApplication"> | string | null
+    userCity?: StringNullableFilter<"ShopApplication"> | string | null
+    userState?: StringNullableFilter<"ShopApplication"> | string | null
+    userZipCode?: IntNullableFilter<"ShopApplication"> | number | null
+    userCountry?: StringNullableFilter<"ShopApplication"> | string | null
     userId?: StringFilter<"ShopApplication"> | string
     reviewedById?: StringNullableFilter<"ShopApplication"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -16076,14 +16339,29 @@ export namespace Prisma {
     createdAt?: SortOrder
     status?: SortOrder
     shopName?: SortOrder
+    category?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
+    zipCode?: SortOrderInput | SortOrder
     province?: SortOrderInput | SortOrder
     postalCode?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
+    validId?: SortOrderInput | SortOrder
+    idType?: SortOrderInput | SortOrder
+    idNumber?: SortOrderInput | SortOrder
+    idSelfie?: SortOrderInput | SortOrder
+    businessDoc?: SortOrderInput | SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    userAddress?: SortOrderInput | SortOrder
+    userCity?: SortOrderInput | SortOrder
+    userState?: SortOrderInput | SortOrder
+    userZipCode?: SortOrderInput | SortOrder
+    userCountry?: SortOrderInput | SortOrder
     userId?: SortOrder
     reviewedById?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
@@ -16098,14 +16376,29 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ShopApplication"> | Date | string
     status?: EnumApplicationStatusFilter<"ShopApplication"> | $Enums.ApplicationStatus
     shopName?: StringFilter<"ShopApplication"> | string
+    category?: StringNullableFilter<"ShopApplication"> | string | null
+    description?: StringNullableFilter<"ShopApplication"> | string | null
     image?: StringNullableFilter<"ShopApplication"> | string | null
     phone?: StringNullableFilter<"ShopApplication"> | string | null
-    description?: StringNullableFilter<"ShopApplication"> | string | null
     address?: StringNullableFilter<"ShopApplication"> | string | null
     city?: StringNullableFilter<"ShopApplication"> | string | null
+    state?: StringNullableFilter<"ShopApplication"> | string | null
+    zipCode?: IntNullableFilter<"ShopApplication"> | number | null
     province?: StringNullableFilter<"ShopApplication"> | string | null
     postalCode?: StringNullableFilter<"ShopApplication"> | string | null
     country?: StringNullableFilter<"ShopApplication"> | string | null
+    validId?: StringNullableFilter<"ShopApplication"> | string | null
+    idType?: StringNullableFilter<"ShopApplication"> | string | null
+    idNumber?: StringNullableFilter<"ShopApplication"> | string | null
+    idSelfie?: StringNullableFilter<"ShopApplication"> | string | null
+    businessDoc?: StringNullableFilter<"ShopApplication"> | string | null
+    firstName?: StringNullableFilter<"ShopApplication"> | string | null
+    lastName?: StringNullableFilter<"ShopApplication"> | string | null
+    userAddress?: StringNullableFilter<"ShopApplication"> | string | null
+    userCity?: StringNullableFilter<"ShopApplication"> | string | null
+    userState?: StringNullableFilter<"ShopApplication"> | string | null
+    userZipCode?: IntNullableFilter<"ShopApplication"> | number | null
+    userCountry?: StringNullableFilter<"ShopApplication"> | string | null
     userId?: StringFilter<"ShopApplication"> | string
     reviewedById?: StringNullableFilter<"ShopApplication"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -16117,19 +16410,36 @@ export namespace Prisma {
     createdAt?: SortOrder
     status?: SortOrder
     shopName?: SortOrder
+    category?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
-    description?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
+    zipCode?: SortOrderInput | SortOrder
     province?: SortOrderInput | SortOrder
     postalCode?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
+    validId?: SortOrderInput | SortOrder
+    idType?: SortOrderInput | SortOrder
+    idNumber?: SortOrderInput | SortOrder
+    idSelfie?: SortOrderInput | SortOrder
+    businessDoc?: SortOrderInput | SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    userAddress?: SortOrderInput | SortOrder
+    userCity?: SortOrderInput | SortOrder
+    userState?: SortOrderInput | SortOrder
+    userZipCode?: SortOrderInput | SortOrder
+    userCountry?: SortOrderInput | SortOrder
     userId?: SortOrder
     reviewedById?: SortOrderInput | SortOrder
     _count?: ShopApplicationCountOrderByAggregateInput
+    _avg?: ShopApplicationAvgOrderByAggregateInput
     _max?: ShopApplicationMaxOrderByAggregateInput
     _min?: ShopApplicationMinOrderByAggregateInput
+    _sum?: ShopApplicationSumOrderByAggregateInput
   }
 
   export type ShopApplicationScalarWhereWithAggregatesInput = {
@@ -16140,14 +16450,29 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ShopApplication"> | Date | string
     status?: EnumApplicationStatusWithAggregatesFilter<"ShopApplication"> | $Enums.ApplicationStatus
     shopName?: StringWithAggregatesFilter<"ShopApplication"> | string
+    category?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    description?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     image?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     phone?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
-    description?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     address?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     city?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    state?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    zipCode?: IntNullableWithAggregatesFilter<"ShopApplication"> | number | null
     province?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     postalCode?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     country?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    validId?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    idType?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    idNumber?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    idSelfie?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    businessDoc?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    firstName?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    lastName?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    userAddress?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    userCity?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    userState?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
+    userZipCode?: IntNullableWithAggregatesFilter<"ShopApplication"> | number | null
+    userCountry?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
     userId?: StringWithAggregatesFilter<"ShopApplication"> | string
     reviewedById?: StringNullableWithAggregatesFilter<"ShopApplication"> | string | null
   }
@@ -17062,14 +17387,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     user: UserCreateNestedOneWithoutShopApplicationsInput
     reviewedBy?: UserCreateNestedOneWithoutReviewedApplicationsInput
   }
@@ -17079,14 +17419,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     userId: string
     reviewedById?: string | null
   }
@@ -17096,14 +17451,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutShopApplicationsNestedInput
     reviewedBy?: UserUpdateOneWithoutReviewedApplicationsNestedInput
   }
@@ -17113,14 +17483,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     reviewedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -17130,14 +17515,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     userId: string
     reviewedById?: string | null
   }
@@ -17147,14 +17547,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ShopApplicationUncheckedUpdateManyInput = {
@@ -17162,14 +17577,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     reviewedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -17922,6 +18352,17 @@ export namespace Prisma {
     not?: NestedEnumApplicationStatusFilter<$PrismaModel> | $Enums.ApplicationStatus
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -17932,16 +18373,36 @@ export namespace Prisma {
     createdAt?: SortOrder
     status?: SortOrder
     shopName?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
     image?: SortOrder
     phone?: SortOrder
-    description?: SortOrder
     address?: SortOrder
     city?: SortOrder
+    state?: SortOrder
+    zipCode?: SortOrder
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    validId?: SortOrder
+    idType?: SortOrder
+    idNumber?: SortOrder
+    idSelfie?: SortOrder
+    businessDoc?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    userAddress?: SortOrder
+    userCity?: SortOrder
+    userState?: SortOrder
+    userZipCode?: SortOrder
+    userCountry?: SortOrder
     userId?: SortOrder
     reviewedById?: SortOrder
+  }
+
+  export type ShopApplicationAvgOrderByAggregateInput = {
+    zipCode?: SortOrder
+    userZipCode?: SortOrder
   }
 
   export type ShopApplicationMaxOrderByAggregateInput = {
@@ -17949,14 +18410,29 @@ export namespace Prisma {
     createdAt?: SortOrder
     status?: SortOrder
     shopName?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
     image?: SortOrder
     phone?: SortOrder
-    description?: SortOrder
     address?: SortOrder
     city?: SortOrder
+    state?: SortOrder
+    zipCode?: SortOrder
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    validId?: SortOrder
+    idType?: SortOrder
+    idNumber?: SortOrder
+    idSelfie?: SortOrder
+    businessDoc?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    userAddress?: SortOrder
+    userCity?: SortOrder
+    userState?: SortOrder
+    userZipCode?: SortOrder
+    userCountry?: SortOrder
     userId?: SortOrder
     reviewedById?: SortOrder
   }
@@ -17966,16 +18442,36 @@ export namespace Prisma {
     createdAt?: SortOrder
     status?: SortOrder
     shopName?: SortOrder
+    category?: SortOrder
+    description?: SortOrder
     image?: SortOrder
     phone?: SortOrder
-    description?: SortOrder
     address?: SortOrder
     city?: SortOrder
+    state?: SortOrder
+    zipCode?: SortOrder
     province?: SortOrder
     postalCode?: SortOrder
     country?: SortOrder
+    validId?: SortOrder
+    idType?: SortOrder
+    idNumber?: SortOrder
+    idSelfie?: SortOrder
+    businessDoc?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    userAddress?: SortOrder
+    userCity?: SortOrder
+    userState?: SortOrder
+    userZipCode?: SortOrder
+    userCountry?: SortOrder
     userId?: SortOrder
     reviewedById?: SortOrder
+  }
+
+  export type ShopApplicationSumOrderByAggregateInput = {
+    zipCode?: SortOrder
+    userZipCode?: SortOrder
   }
 
   export type EnumApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -17986,6 +18482,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumApplicationStatusFilter<$PrismaModel>
     _max?: NestedEnumApplicationStatusFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -18798,6 +19310,14 @@ export namespace Prisma {
     set?: $Enums.ApplicationStatus
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutShopApplicationsNestedInput = {
     create?: XOR<UserCreateWithoutShopApplicationsInput, UserUncheckedCreateWithoutShopApplicationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutShopApplicationsInput
@@ -19051,6 +19571,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumApplicationStatusFilter<$PrismaModel>
     _max?: NestedEnumApplicationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type UserCreateWithoutPostsInput = {
@@ -19365,14 +19912,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     reviewedBy?: UserCreateNestedOneWithoutReviewedApplicationsInput
   }
 
@@ -19381,14 +19943,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     reviewedById?: string | null
   }
 
@@ -19407,14 +19984,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     user: UserCreateNestedOneWithoutShopApplicationsInput
   }
 
@@ -19423,14 +20015,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     userId: string
   }
 
@@ -19678,14 +20285,29 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ShopApplication"> | Date | string
     status?: EnumApplicationStatusFilter<"ShopApplication"> | $Enums.ApplicationStatus
     shopName?: StringFilter<"ShopApplication"> | string
+    category?: StringNullableFilter<"ShopApplication"> | string | null
+    description?: StringNullableFilter<"ShopApplication"> | string | null
     image?: StringNullableFilter<"ShopApplication"> | string | null
     phone?: StringNullableFilter<"ShopApplication"> | string | null
-    description?: StringNullableFilter<"ShopApplication"> | string | null
     address?: StringNullableFilter<"ShopApplication"> | string | null
     city?: StringNullableFilter<"ShopApplication"> | string | null
+    state?: StringNullableFilter<"ShopApplication"> | string | null
+    zipCode?: IntNullableFilter<"ShopApplication"> | number | null
     province?: StringNullableFilter<"ShopApplication"> | string | null
     postalCode?: StringNullableFilter<"ShopApplication"> | string | null
     country?: StringNullableFilter<"ShopApplication"> | string | null
+    validId?: StringNullableFilter<"ShopApplication"> | string | null
+    idType?: StringNullableFilter<"ShopApplication"> | string | null
+    idNumber?: StringNullableFilter<"ShopApplication"> | string | null
+    idSelfie?: StringNullableFilter<"ShopApplication"> | string | null
+    businessDoc?: StringNullableFilter<"ShopApplication"> | string | null
+    firstName?: StringNullableFilter<"ShopApplication"> | string | null
+    lastName?: StringNullableFilter<"ShopApplication"> | string | null
+    userAddress?: StringNullableFilter<"ShopApplication"> | string | null
+    userCity?: StringNullableFilter<"ShopApplication"> | string | null
+    userState?: StringNullableFilter<"ShopApplication"> | string | null
+    userZipCode?: IntNullableFilter<"ShopApplication"> | number | null
+    userCountry?: StringNullableFilter<"ShopApplication"> | string | null
     userId?: StringFilter<"ShopApplication"> | string
     reviewedById?: StringNullableFilter<"ShopApplication"> | string | null
   }
@@ -21298,14 +21920,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     reviewedById?: string | null
   }
 
@@ -21314,14 +21951,29 @@ export namespace Prisma {
     createdAt?: Date | string
     status?: $Enums.ApplicationStatus
     shopName: string
+    category?: string | null
+    description?: string | null
     image?: string | null
     phone?: string | null
-    description?: string | null
     address?: string | null
     city?: string | null
+    state?: string | null
+    zipCode?: number | null
     province?: string | null
     postalCode?: string | null
     country?: string | null
+    validId?: string | null
+    idType?: string | null
+    idNumber?: string | null
+    idSelfie?: string | null
+    businessDoc?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userAddress?: string | null
+    userCity?: string | null
+    userState?: string | null
+    userZipCode?: number | null
+    userCountry?: string | null
     userId: string
   }
 
@@ -21485,14 +22137,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     reviewedBy?: UserUpdateOneWithoutReviewedApplicationsNestedInput
   }
 
@@ -21501,14 +22168,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     reviewedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -21517,14 +22199,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     reviewedById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -21533,14 +22230,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutShopApplicationsNestedInput
   }
 
@@ -21549,14 +22261,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -21565,14 +22292,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumApplicationStatusFieldUpdateOperationsInput | $Enums.ApplicationStatus
     shopName?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    zipCode?: NullableIntFieldUpdateOperationsInput | number | null
     province?: NullableStringFieldUpdateOperationsInput | string | null
     postalCode?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
+    validId?: NullableStringFieldUpdateOperationsInput | string | null
+    idType?: NullableStringFieldUpdateOperationsInput | string | null
+    idNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    idSelfie?: NullableStringFieldUpdateOperationsInput | string | null
+    businessDoc?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userCity?: NullableStringFieldUpdateOperationsInput | string | null
+    userState?: NullableStringFieldUpdateOperationsInput | string | null
+    userZipCode?: NullableIntFieldUpdateOperationsInput | number | null
+    userCountry?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 

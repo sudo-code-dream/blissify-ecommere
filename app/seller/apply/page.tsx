@@ -22,6 +22,8 @@ import AppTheme from "@/theme/AppTheme";
 import ColorModeIconDropdown from "@/theme/ColorModeIconDropDown";
 import ShopDetailsForm from "@/components/ShopDetialsForm";
 import DocumentsVerification from "@/components/DocumentsVerification";
+import InfoPlaceHolder from "@/components/InfoPlaceHolder";
+import { useRouter } from "next/navigation";
 
 const steps = [
   "Personal Information",
@@ -34,27 +36,43 @@ export default function Checkout() {
   const userDetailsRef = React.useRef<HTMLFormElement>(null);
   const shopDetailsRef = React.useRef<HTMLFormElement>(null);
   const documentsVerificationRef = React.useRef<HTMLFormElement>(null);
+  const [formValues, setFormValues] = React.useState<Record<string, any>>({});
+  const router = useRouter();
 
   const handleNext = () => {
     if (activeStep === 0 && userDetailsRef.current) {
       const formData = new FormData(userDetailsRef.current);
       const data = Object.fromEntries(formData.entries());
       console.log("Step 1 (User Details):", data);
+
+      setFormValues((prev) => ({ ...prev, ...data }));
     }
 
     if (activeStep === 1 && shopDetailsRef.current) {
       const formData = new FormData(shopDetailsRef.current);
       const data = Object.fromEntries(formData.entries());
       console.log("Step 2 (Shop Details):", data);
+
+      setFormValues((prev) => ({ ...prev, ...data }));
+    }
+
+    if (activeStep === 2 && documentsVerificationRef.current) {
+      const formData = new FormData(documentsVerificationRef.current);
+      const data = Object.fromEntries(formData.entries());
+      console.log("Step 3 (Documents Verification):", data);
+
+      setFormValues((prev) => ({ ...prev, ...data }));
     }
 
     setActiveStep((prev) => prev + 1);
   };
+
+  console.log("All Collected Form Data:", formValues);
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const getStepContent = (step: number) => {
+  const getStepContent = (step: number, formValues: Record<string, any>) => {
     switch (step) {
       case 0:
         return <UserDetailsForm formRef={userDetailsRef} />;
@@ -63,11 +81,65 @@ export default function Checkout() {
       case 2:
         return <DocumentsVerification formRef={documentsVerificationRef} />;
       case 3:
-        return <Review />;
+        return <Review formValues={formValues} />;
       default:
         throw new Error("Unknown step");
     }
   };
+
+  const handleSubmit = async (evt: React.MouseEvent) => {
+    evt.preventDefault();
+
+    const file = formValues.logo;
+    if (!(file instanceof File)) {
+      alert("No valid logo file found.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file); // 👈 match the field name used in your /api/blob route
+
+    try {
+      // 1. Upload the file to blob storage
+      const uploadRes = await fetch("/api/blob", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!uploadRes.ok) {
+        throw new Error("Failed to upload logo image");
+      }
+
+      const { url } = await uploadRes.json(); // Make sure your blob API returns `{ url: "..." }`
+
+      // 2. Update logo field with blob URL
+      const updatedFormValues = {
+        ...formValues,
+        logo: url,
+      };
+
+      // 3. Submit to /api/shop/apply
+      const res = await fetch("/api/shop/apply", {
+        method: "POST",
+        body: JSON.stringify(updatedFormValues),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        alert("Application submitted!");
+        router.push("/profile");
+      } else {
+        alert("Failed to submit. Try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong. Try again.");
+    }
+  };
+  
+  
 
   return (
     <AppTheme disableCustomTheme={false}>
@@ -229,7 +301,7 @@ export default function Checkout() {
               </Stack>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, formValues)}
                 <Box
                   sx={[
                     {
@@ -265,13 +337,25 @@ export default function Checkout() {
                       Previous
                     </Button>
                   )}
-                  <Button
-                    variant='contained'
-                    endIcon={<ChevronRightRoundedIcon />}
-                    onClick={handleNext}
-                    sx={{ width: { xs: "100%", sm: "fit-content" } }}>
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                  </Button>
+                  {activeStep === steps.length - 1 ? (
+                    <Button
+                      variant='contained'
+                      endIcon={<ChevronRightRoundedIcon />}
+                      onClick={handleSubmit}
+                      sx={{ width: { xs: "100%", sm: "fit-content" } }}>
+                      Submit Application
+                    </Button>
+                  ) : (
+                    <Button
+                      variant='contained'
+                      endIcon={<ChevronRightRoundedIcon />}
+                      onClick={handleNext}
+                      sx={{
+                        width: { xs: "100%", sm: "fit-content" },
+                      }}>
+                      Next
+                    </Button>
+                  )}
                 </Box>
               </React.Fragment>
             )}

@@ -75,7 +75,7 @@ export default function Profile() {
   const currentImage = previewImage || session?.user?.image || "No Image";
 
   return (
-    <div className='px-6 pb-4 sm:px-4'>
+    <div className='px-6 pb-4 sm:w-1/2 sm:px-4'>
       <div className='border-b border-[#efefef] py-4'>
         <h1 className='text-[#333] text-lg font-medium leading-6 m-0 capitalize'>
           My Profile
@@ -93,7 +93,7 @@ export default function Profile() {
 
         {/* Sidebar Section - Profile Picture */}
         {/* Sidebar Section - Profile Picture */}
-        <div className='w-full lg:w-[17.5rem] border-t lg:border-t-0 lg:border-l border-[#efefef] flex justify-center pt-6 lg:pt-0 lg:pl-6'>
+        <div className='w-full  lg:w-[17.5rem] mt-4 border-t lg:border-t-0 lg:border-l border-[#efefef] flex justify-center pt-6 lg:pt-0 lg:pl-6'>
           <div className='flex flex-col items-center gap-4'>
             <img
               src={currentImage}

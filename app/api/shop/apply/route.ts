@@ -48,28 +48,36 @@ export async function POST(req: Request) {
     const body = await req.json();
     const {
       shopName,
-      image,
-      phone,
-      description,
-      address,
-      city,
-      province,
-      postalCode,
-      country,
+      logo,
+      shopDescription,
+      userAddress,
+      shopCity,
+      shopZipCode,
+      shopCountry,
+      businessDocument,
+      idNumber,
+      idType,
+      shopCategory,
+      shopState,
+
+      firstName,
+      lastName,
+      userCity,
+      userCountry,
+      userState,
+      userZipCode,
     } = body;
 
     // Create application
     const application = await prisma.shopApplication.create({
       data: {
         shopName,
-        image,
-        phone,
-        description,
-        address,
-        city,
-        province,
-        postalCode,
-        country,
+        image: logo,
+        description: shopDescription,
+        address: userAddress,
+        city: shopCity,
+        postalCode: shopZipCode,
+        country: shopCountry,
         userId,
       },
     });
